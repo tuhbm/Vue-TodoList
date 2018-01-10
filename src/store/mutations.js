@@ -7,7 +7,7 @@ export const state = {
 }
 
 export const mutations = {
-  addTodo () {
+  addTodo (state, { title, description }) {
     let id = state.todos[ state.todos.length - 1 ].id
     id += 1
 
@@ -16,5 +16,11 @@ export const mutations = {
       title,
       description
     })
+  },
+  toggleTodo (state, { todo }) {
+    todo.done = !todo.done
+  },
+  deleteTodo (state, { id }) {
+    state.todos = state.todos.filter(todo => todo.id !== id)
   }
 }

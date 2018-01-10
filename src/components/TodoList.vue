@@ -1,15 +1,26 @@
 <template>
-  <div class="todo-item">
+  <div
+    class="todo-item"
+    :class="{completed: todo.done}">
     <h3 class="tit_todo" @dblclick="editing = true" v-show="!editing">{{todo.title}}</h3>
     <p class="txt_todo" @dblclick="editing = true" v-show="!editing">{{todo.description}}</p>
-    <form action="" v-show="editing" @submit.prevent="doneEdit">
-      <input type="text" v-show="editing">
-      <textarea v-show="editing"></textarea>
-      <button type="submit" class="btn btn_edit">수정</button>
+    <form
+      v-show="editing"
+      @submit.prevent="doneEdit">
+      <input
+        type="text"
+        v-show="editing"
+        v-model="todo.title">
+      <textarea
+        v-show="editing"
+        v-model="todo.description"></textarea>
+      <button
+        type="submit"
+        class="btn btn_edit">수정</button>
     </form>
     <div v-show="!editing">
-      <button type="submit" class="btn btn_done">완료</button>
-      <button type="submit" class="btn btn_del">삭제</button>
+      <button type="submit" :class="{completed: todo.done}" class="btn btn_done" @click="toggleTodo({ todo })">완료</button>
+      <button type="submit" :class="{completed: todo.done}" class="btn btn_del" @click="deleteTodo({ id: todo.id })">삭제</button>
     </div>
   </div>
 </template>
@@ -25,6 +36,8 @@
     },
     methods: {
       ...mapMutations([
+        'toggleTodo',
+        'deleteTodo'
       ]),
       doneEdit () {
         this.editing = false
