@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item">
-    <h3 class="tit_todo" @dblclick="editing = true" v-show="!editing">투두 제목</h3>
-    <p class="txt_todo" @dblclick="editing = true" v-show="!editing">투두 내용</p>
+    <h3 class="tit_todo" @dblclick="editing = true" v-show="!editing">{{todo.title}}</h3>
+    <p class="txt_todo" @dblclick="editing = true" v-show="!editing">{{todo.description}}</p>
     <form action="" v-show="editing" @submit.prevent="doneEdit">
       <input type="text" v-show="editing">
       <textarea v-show="editing"></textarea>
@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+  import { mapMutations } from 'vuex'
   export default {
     name: 'todo-list',
     props: ['todo'],
@@ -23,6 +24,8 @@
       }
     },
     methods: {
+      ...mapMutations([
+      ]),
       doneEdit () {
         this.editing = false
       }

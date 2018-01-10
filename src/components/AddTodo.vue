@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form @submit.prevent="todoAdd">
     <input type="text" v-model="title" placeholder="제목">
     <input type="text" v-model="description" placeholder="내용">
     <button type="submit">추가</button>
@@ -23,6 +23,7 @@ export default {
         title: this.title,
         description: this.description
       })
+      this.title = this.description = ''
     }
   }
 }

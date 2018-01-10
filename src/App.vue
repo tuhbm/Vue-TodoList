@@ -5,13 +5,16 @@
     </header>
     <main>
       <add-todo></add-todo>
-      <todo-list></todo-list>
+      <todo-list
+        v-for="(todo, index) in todos"
+        :todo="todo"
+        :key="index"></todo-list>
     </main>
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import AddTodo from './components/AddTodo'
 import TodoList from './components/TodoList'
 
@@ -19,7 +22,7 @@ export default {
   name: 'app',
   components: { AddTodo, TodoList },
   computed: {
-    // ...mapState()
+    ...mapState(['todos'])
   }
 }
 </script>
